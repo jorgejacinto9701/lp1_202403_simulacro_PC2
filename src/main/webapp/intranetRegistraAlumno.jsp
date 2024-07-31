@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="esS" >
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/global.js"></script>
-    <script type="text/javascript" src="js/bootstrapValidator.js"></script>
-    <link rel="stylesheet" href="css/bootstrap.css"/>
-    <link rel="stylesheet" href="css/dataTables.bootstrap.min.css"/>
-    <link rel="stylesheet" href="css/bootstrapValidator.css"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/bootstrapValidator.js"></script>
+<link rel="stylesheet" href="css/bootstrap.css"/>
+<link rel="stylesheet" href="css/dataTables.bootstrap.min.css"/>
+<link rel="stylesheet" href="css/bootstrapValidator.css"/>
 
-    <title>Sistemas - Jorge Jacinto Gutarra</title>
+<title>Sistemas - Jorge Jacinto Gutarra</title>
 </head>
 <body>
 
@@ -97,15 +97,6 @@
                                         notEmpty: {
                                             message: 'Los Nombres son requeridos'
                                         },
-                                        regexp: {
-                                            regexp: /^[a-zA-Z\s·ÈÌÛ˙¡…Õ”⁄Ò—¸‹}]{3,30}$/,
-                                            message: 'Los Nombres tienen de 4 a 40 caracteres'
-                          ††††††††††††††},
-                          				remote :{
-                          				delay   : 1000,
-                          				url     : 'validarAlumno',
-                          				message : 'El nombre ya existe'
-                         				}
                                     }
                                 },
                                 apellidos: {
@@ -113,15 +104,6 @@
                                         notEmpty: {
                                             message: 'Los Apellidos son requeridos'
                                         },
-                                        regexp: {
-                                            regexp: /^[a-zA-Z\s·ÈÌÛ˙¡…Õ”⁄Ò—¸‹}]{3,30}$/,
-                                            message: 'Los Apellidos tienen de 4 a 40 caracteres'
-                          ††††††††††††††},
-                          				remote :{
-                          				delay   : 1000,
-                          				url     : 'validarAlumno',
-                          				message : 'El apellido ya existe'
-                         				}
                                     }
                                 },
                                 telefono:{
@@ -132,13 +114,8 @@
                                         },
                                         regexp: {
                                             regexp: /^9[0-9]{8}$/,
-                                            message: 'El tel&eacute;fono es 9 d&iacute;gitos'
-                                        },
-                                        remote :{
-                              				delay   : 1000,
-                              				url     : 'validarAlumno',
-                              				message : 'El telefono ya existe'
-                             				}
+                                            message: 'El tel&eacute;fono es de 9 d&iacute;gitos y empieza con 9'
+                                        }
                                     }
                                 },
                                 dni:{
@@ -150,12 +127,7 @@
                                         regexp: {
                                             regexp: /^[0-9]{8}$/,
                                             message: 'El DNI es 8 d&iacute;gitos'
-                                        },
-                                        remote :{
-                              				delay   : 1000,
-                              				url     : 'validarAlumno',
-                              				message : 'El DNI ya existe'
-                             				}
+                                        }
                                     }
                                 },
                                 correo: {
@@ -163,9 +135,8 @@
                                         notEmpty: {
                                             message: 'Debe ingresar un correo v&aacute;lido'
                                         },
-                               			 regexp: {
-                                			regexp: /^i[0-9]+@cibertec\.edu\.pe$/,
-                                    		message: 'El correo debe ser de Cibertec'
+                                        emailAddress: {
+                                			message: 'Debe tener formato de correo'
                                			 },
                                     }
                                 },
@@ -175,10 +146,6 @@
                                         notEmpty : {
                                             message : 'La fecha de nacimiento es requerida'
                                         },
-                                        regexp: {
-                                            regexp: /^(?:19\d\d|20(?:0[0-9]|1[0-9]))-(?:0[1-4]|1[0-2])-(?:0[1-9]|[12][0-9]|30)$/,
-                                            message: 'La fecha debe ser mayor de edad'
-                          ††††††††††††††},
                                     }
                                 },
                                 pais: {
@@ -215,14 +182,11 @@
 
     $.getJSON("cargaPais", {}, function(data) {
         $.each(data, function(index, item) {
-            $("#id_pais").append(
-                "<option value=" +  item.idPais +" >" + item.nombre + "</option>"
-            );
+            $("#id_pais").append("<option value=" +  item.idPais +" >" + item.nombre + "</option>");
         });
     });
 
-    /*Lizarraga*/
-    function limpiarFormulario() {
+   function limpiarFormulario() {
         $('#id_nombres').val('');
         $('#id_apellidos').val('');
         $('#id_telefono').val('');

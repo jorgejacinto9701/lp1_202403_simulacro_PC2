@@ -1,4 +1,3 @@
-
 <%@page import="entity.Opcion"%>
 <%@page import="java.util.ArrayList"%>
 <div class="container">
@@ -70,7 +69,7 @@
 	          Consultas(PC03)<b class="caret"></b>
 	        </a>
 	        <ul class="dropdown-menu">
-	        		        	<%
+	        <%
 	        		ArrayList<Opcion>	lista3= (ArrayList<Opcion>)	session.getAttribute("objMenus");
 	        	if(lista != null){
 	        		for(Opcion opc : lista3){
