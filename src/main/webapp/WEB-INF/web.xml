@@ -3,7 +3,7 @@
 	xmlns="https://jakarta.ee/xml/ns/jakartaee"
 	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
 	id="WebApp_ID" version="6.0">
-	<display-name>lp1_202403_simulacro_PC1</display-name>
+	<display-name>lp1_202403_simulacro_PC2</display-name>
 	
 	<welcome-file-list>
         <welcome-file>login.jsp</welcome-file>
