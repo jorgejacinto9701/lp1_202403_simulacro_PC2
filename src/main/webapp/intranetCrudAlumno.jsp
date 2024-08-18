@@ -128,6 +128,82 @@
 			</div>
 		</div>
  		<!-- FIN MODAL DE REGISTRO -->
+ 		
+ 		<!-- INICIO MODAL DE ACTUALIZAR -->
+		<div class="modal fade" id="id_div_modal_actualiza" >
+			<div class="modal-dialog" style="width: 60%">
+					<div class="modal-content">
+					<div class="modal-header" >
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4><span class="glyphicon glyphicon-ok-sign"></span> Actualiza de Alumno</h4>
+					</div>
+					<div class="modal-body" >
+						 <div class="panel-group" id="steps">
+			                   <div class="panel panel-default">
+			                   		<div id="stepOne" class="panel-collapse collapse in">
+			                   			<form id="id_form_actualiza">
+			                   			<input type="hidden" name="metodo" value="paramActualiza">
+			                   			<input type="hidden" name="idAlumno" id="idAlumno">
+			                   			<div class="panel-body">
+			                                <div class="row" style="margin-top: 4%">
+												<div class="form-group col-md-6">
+													<label class="control-label" for="id_nombre_actualiza">Nombres</label>
+													<input class="form-control" type="text" id="id_nombre_actualiza" name="nombres" placeholder="Ingrese el nombre">	
+												</div>
+												<div class="form-group col-md-6">
+													<label class="control-label" for="id_apellido_actualiza">Apellidos</label>
+													<input class="form-control" type="text" id="id_apellido_actualiza" name="apellidos" placeholder="Ingrese el apellido">	
+												</div>
+											</div>
+											<div class="row" style="margin-top: 2%">
+												<div class="form-group col-md-3">
+													<label class="control-label" for="id_telefono_actualiza">Teléfono</label>
+													<input class="form-control" type="text" id="id_telefono_actualiza" name="telefono" placeholder="Ingrese el teléfono">	
+												</div>
+												<div class="form-group col-md-3">
+													<label class="control-label" for="id_dni_actualiza">DNI</label>
+													<input class="form-control" type="text" id="id_dni_actualiza" name="dni" placeholder="Ingrese el DNI">	
+												</div>
+												<div class="form-group col-md-6">
+													<label class="control-label" for="id_correo_actualiza">Correo</label>
+													<input class="form-control" type="text" id="id_correo_actualiza" name="correo" placeholder="Ingrese el correo">	
+												</div>
+											</div>
+											<div class="row" style="margin-top: 2%">
+												<div class="form-group col-md-4">
+													<label class="control-label" for="id_fecha_actualiza">Fecha Nacimiento</label>
+													<input class="form-control" type="date" id="id_fecha_actualiza" name="fechaNacimiento">	
+												</div>
+												<div class="form-group col-md-4">
+													<label class="control-label" for="id_pais_actualiza"> País </label> 
+													<select	class="form-control" id="id_pais_actualiza" name="pais" >
+														<option value=" ">[Seleccione]</option>
+													</select>
+												</div>
+												<div class="form-group col-md-4">
+													<label class="control-label" for="id_estado_actualiza"> Estado </label> 
+													<select	class="form-control" id="id_estado_actualiza" name="estado" >
+														<option value=" ">[Seleccione]</option>
+														<option value="1">Activo</option>
+														<option value="0">Inactivo</option>
+													</select>
+												</div>
+											</div>
+											<div class="row"  align="center" style="margin-top: 2%">
+													<button type="button" style="width: 80px" id="id_btn_actualiza" class="btn btn-primary btn-sm">Actualizar</button>
+		                                        	<button type="button" style="width: 80px" id="id_btn_act_cancelar" class="btn btn-primary btn-sm" data-dismiss="modal">Cancelar</button>
+													
+											</div>
+			                             </div>
+			                             </form>
+			                        </div>
+			                   </div>
+			              </div>
+					</div>
+				</div>
+			</div>
+		</div>
+ 		<!-- FIN MODAL DE ACTUALIZAR -->
 		
 	</div>
 	
@@ -137,12 +213,12 @@
 		$.getJSON("cargaPais", {}, function (data){
 			$.each(data, function(index, item){
 				$("#id_pais").append("<option value=" +  item.idPais +" >" +  item.nombre + "</option>");
+				$("#id_pais_actualiza").append("<option value=" +  item.idPais +" >" +  item.nombre + "</option>");
 			});	
 		});	
 		
-		$(document)
-		.ready(function(){
-			$('#id_form_registra').bootstrapValidator(
+		$(document).ready(function(){
+				$('#id_form_registra').bootstrapValidator(
 		                {
 		                    message : 'This value is not valid',
 		                    feedbackIcons : {
@@ -192,6 +268,7 @@
 		                            }
 		                        },
 		                        correo: {
+		                        	selector: "#id_correo",
 		                            validators: {
 		                                notEmpty: {
 		                                    message: 'Debe ingresar un correo v&aacute;lido'
@@ -210,6 +287,7 @@
 		                            }
 		                        },
 		                        pais: {
+		                        	selector: "#id_pais",
 		                            validators: {
 		                                notEmpty: {
 		                                    message: 'Debe seleccionar un pa&iacute;s'
@@ -279,7 +357,7 @@
 						},className:'text-center'},
 						{data: "pais.nombre",className:'text-center'},
 						{data: function(row, type, val, meta){
-							return '<button type="button" class="btn btn-info btn-sm" onClick="verFormularioActualiza(\'' + row.idAlumno + '\',\'' +  row.nombres   + '\',\'' +  row.apellidos   + '\',\'' +  row.telefono   + '\',\'' +  row.dni   + '\',\'' +  row.correo + '\',\'' +  row.fechaNacimiento  + '\',\'' +  row.estado   + '\',\'' +  row.pais.idPais +'\');">Editar</button>';  
+							return '<button type="button" class="btn btn-info btn-sm" onClick="verFormularioActualiza(\'' + row.idAlumno + '\',\'' +  row.nombres   + '\',\'' +  row.apellidos   + '\',\'' +  row.telefono   + '\',\'' +  row.dni   + '\',\'' +  row.correo + '\',\'' +  row.fechaNacimientoFormateada  + '\',\'' +  row.estado   + '\',\'' +  row.pais.idPais +'\');">Editar</button>';  
 						},className:'text-center'},
 						{data: function(row, type, val, meta){
 							return '<button type="button" class="btn btn-warning btn-sm" onClick="eliminacionLogica(\'' + row.idAlumno +'\');" >E.Lógica</button>';
@@ -324,6 +402,133 @@
 		          }
 		    });
 		}
+		
+		function verFormularioActualiza(idAlumno,nombres, apellidos,telefono ,dni ,correo ,fechaNacimiento ,estado,idPais){
+			console.log(">> verFormularioActualiza >> " + idAlumno);
+			$("#id_div_modal_actualiza").modal("show");
+			$("#idAlumno").val(idAlumno);
+			$("#id_nombre_actualiza").val(nombres);
+			$("#id_apellido_actualiza").val(apellidos);
+			$("#id_telefono_actualiza").val(telefono);
+			$("#id_dni_actualiza").val(dni);
+			$("#id_correo_actualiza").val(correo);
+			$("#id_fecha_actualiza").val(fechaNacimiento);
+			$("#id_estado_actualiza").val(estado);
+			$("#id_pais_actualiza").val(idPais);
+		}
+		
+		
+		$("#id_btn_actualiza").click(function() {
+			var validator = $('#id_form_actualiza').data('bootstrapValidator');
+		    validator.validate();
+			
+		    if (validator.isValid()) {
+		        $.ajax({
+			          type: "POST",
+			          url: "crudAlumno", 
+			          data: $('#id_form_actualiza').serialize(),
+			          success: function(data){
+			        	  mostrarMensaje(data.mensaje);
+			        	  agregarGrilla(data.datos);
+			        	  validator.resetForm();
+			        	  $('#id_div_modal_actualiza').modal("hide");
+			          },
+			          error: function(){
+			        	  mostrarMensaje(MSG_ERROR);
+			          }
+			    });
+		    }
+		});
+		
+		
+		$(document).ready(function(){
+			$('#id_form_actualiza').bootstrapValidator(
+	                {
+	                    message : 'This value is not valid',
+	                    feedbackIcons : {
+	                        valid : 'glyphicon glyphicon-ok',
+	                        invalid : 'glyphicon glyphicon-remove',
+	                        validating : 'glyphicon glyphicon-refresh'
+	                    },
+	                    fields: {
+	                        nombres: {
+	                        	selector: "#id_nombre_actualiza",
+	                            validators: {
+	                                notEmpty: {
+	                                    message: 'Los Nombres son requeridos'
+	                                },
+	                            }
+	                        },
+	                        apellidos: {
+	                        	selector: "#id_apellido_actualiza",
+	                            validators: {
+	                                notEmpty: {
+	                                    message: 'Los Apellidos son requeridos'
+	                                },
+	                            }
+	                        },
+	                        telefono:{
+	                            selector: "#id_telefono_actualiza",
+	                            validators:{
+	                                notEmpty: {
+	                                    message: 'El tel&eacute;fono es obligatorio'
+	                                },
+	                                regexp: {
+	                                    regexp: /^9[0-9]{8}$/,
+	                                    message: 'El tel&eacute;fono es de 9 d&iacute;gitos y empieza con 9'
+	                                }
+	                            }
+	                        },
+	                        dni:{
+	                            selector: "#id_dni_actualiza",
+	                            validators:{
+	                                notEmpty: {
+	                                    message: 'El DNI es obligatorio'
+	                                },
+	                                regexp: {
+	                                    regexp: /^[0-9]{8}$/,
+	                                    message: 'El DNI es 8 d&iacute;gitos'
+	                                }
+	                            }
+	                        },
+	                        correo: {
+	                        	 selector: "#id_correo_actualiza",
+	                            validators: {
+	                                notEmpty: {
+	                                    message: 'Debe ingresar un correo v&aacute;lido'
+	                                },
+	                                emailAddress: {
+	                        			message: 'Debe tener formato de correo'
+	                       			 },
+	                            }
+	                        },
+	                        fechaNacimiento: {
+	                            selector : "#id_fecha_actualiza",
+	                            validators : {
+	                                notEmpty : {
+	                                    message : 'La fecha de nacimiento es requerida'
+	                                },
+	                            }
+	                        },
+	                        pais: {
+	                        	selector : "#id_pais_actualiza",
+	                            validators: {
+	                                notEmpty: {
+	                                    message: 'Debe seleccionar un pa&iacute;s'
+	                                }
+	                            }
+	                        },
+	                        estado: {
+	                        	selector : "#id_estado_actualiza",
+	                            validators: {
+	                                notEmpty: {
+	                                    message: 'Debe seleccionar un estado'
+	                                }
+	                            }
+	                        }
+	                    }
+	                });
+	    });
 		
 </script>
 </body>

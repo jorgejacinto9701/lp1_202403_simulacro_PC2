@@ -106,6 +106,55 @@ public class CrudAlumnoServlet extends HttpServlet {
 	protected void actualiza(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("[ini] actualiza");
 
+		// 1 Recuperar datos de la GUI
+		String id = req.getParameter("idAlumno");
+		String nom = req.getParameter("nombres");
+		String ape = req.getParameter("apellidos");
+		String tel = req.getParameter("telefono");
+		String dni = req.getParameter("dni");
+		String con = req.getParameter("correo");
+		String fecNac = req.getParameter("fechaNacimiento");
+		String pa = req.getParameter("pais");
+		String estado = req.getParameter("estado");
+
+		// 2 Llenar objAlumno
+		Alumno objAlumno = new Alumno();
+		objAlumno.setIdAlumno(Integer.parseInt(id));
+		objAlumno.setNombres(nom);
+		objAlumno.setApellidos(ape);
+		objAlumno.setTelefono(tel);
+		objAlumno.setDni(dni);
+		objAlumno.setCorreo(con);
+		objAlumno.setFechaNacimiento(Date.valueOf(fecNac));
+		objAlumno.setFechaActualizacion(new Date(System.currentTimeMillis()));
+		objAlumno.setEstado(Integer.parseInt(estado));
+
+		Pais objPais = new Pais();
+		objPais.setIdPais(Integer.parseInt(pa));
+		objAlumno.setPais(objPais);
+
+		// 3 Se envía objAlumno registrar
+		ModelAlumno modelAlumno = new ModelAlumno();
+		int salida = modelAlumno.actualizarAlumno(objAlumno);
+
+		// 4 Se envía el mensaje
+		Respuesta objRespuesta = new Respuesta();
+
+		if (salida>0) {
+			List<Alumno>  lstDatos = modelAlumno.listaAlumnoPorNombres("%");
+			objRespuesta.setDatos(lstDatos);
+			objRespuesta.setMensaje("Actualización existosa");
+		}
+
+		Gson gson = new Gson();
+		String json = gson.toJson(objRespuesta);
+
+		resp.setContentType("application/json;charset=UTF-8");
+
+		PrintWriter out = resp.getWriter();
+		out.println(json);
+
+		
 		System.out.println("[fin] actualiza");
 	}
 
