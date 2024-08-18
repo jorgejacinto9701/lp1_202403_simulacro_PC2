@@ -291,6 +291,36 @@ public class ModelAlumno {
 		return lstSalida;
 	}
 	
-	
+	public boolean existeAlumnoPorDNI(String dni) {
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		boolean existe = false;
+		try {
+			conn = MySqlDBConexion.getConexion();
+			String sql = "select idAlumno from alumno where dni = ?";
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, dni);
+
+			System.out.println("SQL => " + pstm);
+			rs = pstm.executeQuery();
+			if(rs.next()) {
+				existe = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstm != null)
+					pstm.close();
+				if (conn != null)
+					conn.close();
+
+			} catch (Exception e2) {}
+		}
+		return existe;
+	}
 	
 }

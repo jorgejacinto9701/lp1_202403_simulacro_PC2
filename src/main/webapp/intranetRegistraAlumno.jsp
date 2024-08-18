@@ -117,6 +117,11 @@ $(document)
                                 regexp: {
                                     regexp: /^[0-9]{8}$/,
                                     message: 'El DNI es 8 d&iacute;gitos'
+                                },
+                                remote :{
+                                	delay   : 1000,
+                                	url     : 'validaRemoteRegistraAlumnoCampoDNIServlet',
+                                	message : 'El DNI ya existe'
                                 }
                             }
                         },
@@ -136,6 +141,11 @@ $(document)
                                 notEmpty : {
                                     message : 'La fecha de nacimiento es requerida'
                                 },
+                                remote :{
+                                	delay   : 1000,
+                                	url     : 'validaRemoteRegistraAlumnoCampoFechaNacimientoServlet',
+                                	message : 'No es mayor de Edad'
+                                }
                             }
                         },
                         pais: {
